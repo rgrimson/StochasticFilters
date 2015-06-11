@@ -1,0 +1,161 @@
+This is a brief reference file. 
+We list the implemented functions in the stochastic_filters library and a short help for each.
+See examples and code for more details.
+
+
+*-*: Phantom_sin(d=500):
+Draws a phantom with an S
+
+
+*-*: Phantom_circ(d=500,r=0.66):
+Draws a phantom with a circle
+
+
+*-*: Phantom_Y(d=500,r=0.66):
+Draws a phantom with three regions
+
+
+*-*: Phantom_4SQ(d=500):
+Draws a phantom with four squares
+
+
+*-*: Phantom_Str(d=500):
+Draws a phantom with stripes
+
+
+*-*: Speckle_Img(Img,looks=1):
+adds speckle noise to the image
+
+
+*-*: Disp(Img,vmin=0,vmax=0,fname=""): 
+shows an image
+
+
+*-*: NR_L(y):
+solves log(x)-digamma(x)=y using Newton method
+
+
+*-*: MLtheta(W):
+computes the maximum likelihood Whishart parameters for a given sample
+
+
+*-*: Save_ENVI(dst_filename,data, src_filename = None):
+save image in ENVI format (use geocoding from src image if given)
+
+
+*-*: Save_GTIFF(src_filename, dst_filename,data):
+save image in GeoTiff format. Use geocoding from src image
+
+
+*-*: Save_Stk_GTIFF(src_filename, dst_filename,data):
+save image stack in GeoTiff format. Use geocoding from src image
+
+
+*-*: loadStack(src_filename):
+load image stack 
+
+
+*-*: FiltStack(Stk, Filt='CK', Er=1, Sr=2, eta=0.95):
+Filter each image in a stack with given parameters
+
+
+*-*: p2w(p,eta):
+transforms a p-value into a weight for the convolution kernel
+
+
+*-*: loadBand(src_filename, band=0):
+read a band from an image file
+
+
+*-*: Q(O,F):
+compute Q-index between images
+
+
+*-*: ComputeImgStats(Img,Eval_Regions=[]):
+computes mean and n.looks for the slices of Img given in Eval_Regions
+
+
+*-*: ClassifyPhantom(Ph):
+given a phantom with n different values computes a similar matrix of integers (classification).
+
+
+*-*: Classify(Img,mode="C",K=2,verbose=True):
+Classify an image into K classes using EM for GMM from ML parameters
+
+
+*-*: kappa(M):
+Compute the kappa statistical measure of inter-rater agreement from confussion matrix
+
+
+*-*: kappa2(M,N):
+Compute the kappa statistical measure of inter-rater agreement between two images
+
+
+*-*: BackUpExisting(filename):
+rename file with a new name
+
+
+*-*: DrawEvalRegions(Img,Eval_Regions):
+create an image showing the evaluation regions
+
+
+*-*: FilterEval(I_Filt,I_Orig,Eval_Regions=[]):
+evaluate a filter. Compute Q-index and, given evaluation regions, radiometric preservation and number of looks for each region
+
+
+*-*: FiltersEval(I_Corr,I_Orig=None,n_iter=1,V_Sr=[2],V_eta=[0.97],Filters=["CH","CK","CS"],Eval_Regions=[],saveImg=False,srcImg = None,info_str=''):
+evaluate a tuple of filters as in FilterEval
+
+
+*-*: MC_FiltersEval(I_Orig,n_mc_iter=100,looks=3,n_iter=1,V_Sr=[2],V_eta=[0.97],Filters=['CH','CK','CS'],Eval_Regions=[],base_fname='MCFE'):
+Evaluate different filters as in FilterEval using Monte Carlo method.
+
+
+*-*: Filt(Img, F,Er=1,Sr=2,eta=0.97):
+Filter an image with given Filter (CH,DH,CK,DK,CS,DS), estimation radius , search radius, and eta value
+
+
+external C functions
+
+*-*: Gamma(double x)
+Computes the gamma function
+
+
+*-*: digamma(double x)
+Computes the digamma function
+
+
+*-*: polygamma(int n, double x)
+Computes the polymma function
+
+
+*-*: NR_L(double y)
+Computes the root of log(y)-digamma(y) using Newton Raphson method.
+
+
+*-*: Compute_ML_Param(double M[], double S[],double L[], double m[], int Er, int dimx, int dimy)
+Computes the Maximal Liklihood parameters (S for mean, L for n.looks) for each pixel in a given image M, an Evaluation radius Er, and the dimensions of the image
+
+
+*-*: Compute_ML_Param_NMWin(double M[], double S[],double L[], double m[], int dimx, int dimy)
+Computes the Maximal Liklihood parameters (S for mean, L for n.looks) for each pixel in a given image M, using descented windows, and the dimensions of the image. returns also the number of pixels in the most likely window.
+
+
+*-*: Wishartpdf(double x,double L,double s)
+Computes the Whishart pdf
+
+
+*-*: Chisq(double x, double d)
+Computes chi square function with d degrees of freedom
+
+
+
+*-*: p2w(double p,double eta)
+Transforms a p-value into a weight for the convolution kernel
+
+
+*-*: Filter_fromMLParam(double M[], double F[], double S[],double L[], double m[],int dimx, int dimy, int Sr, double eta, char Filt)
+Filters an image given precomputed ML parameters
+
+*-*: Filter(double I_Corr[],double I_Filt[],int dimx, int dimy, int Er, int Sr, double eta, char FiltType)
+Filters a corruted image (Er=0 for descentered windows)
